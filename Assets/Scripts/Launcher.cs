@@ -8,6 +8,7 @@ public class Launcher : MonoBehaviour
     public float springForce = 1000f;
     public float speed = 10f;
     Transform transform;
+    bool active = false;
 
     void Start()
     {
@@ -15,9 +16,14 @@ public class Launcher : MonoBehaviour
         spring = GetComponent<SpringJoint>();
     }
 
+    public void Activate()
+    {
+        active = true;
+    }
+
     void Update()
     {
-        if (Input.GetKey("s"))
+        if (Input.GetKey("s") && active)
         {
             spring.spring = 0;
             transform.position = transform.position + new Vector3(0, 0, -speed*0.001f);

@@ -4,22 +4,10 @@ using UnityEngine;
 
 public class Yepper : MonoBehaviour
 {
-    public GameState deadZone;
 
-    // Start is called before the first frame update
-    void Start()
+    void OnTriggerEnter(Collider other)
     {
-
-    }
-
-    private void OnTriggerEnter(Collider other) {
-        deadZone.score += 500000;
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        GameManager.instance.AddPoints(1000);
+        other.gameObject.GetComponent<Rigidbody>().velocity = Random.insideUnitSphere * other.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
     }
 }
