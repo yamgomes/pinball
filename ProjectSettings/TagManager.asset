@@ -6,8 +6,8 @@ TagManager:
   tags:
   - Ball
   - MainMenu
-  - Scores
   - Gameplay
+  - GameOver
   layers:
   - Default
   - TransparentFX
