@@ -48,6 +48,7 @@ public class ScoreManager : MonoBehaviour
             p = new Player("Legend", 10000);
             AddPlayer(p);
             p = new Player("God", 100000);
+            AddPlayer(p);
             SaveScores();
             Debug.Log("Scores saved");
         }
