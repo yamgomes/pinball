@@ -38,10 +38,12 @@ public class GameManager : MonoBehaviour
         foreach(GameObject item in GameObject.FindGameObjectsWithTag("Gameplay"))
         {
             gameplayItems.Add(item);
+            item.SetActive(false);
         }
         foreach(GameObject item in GameObject.FindGameObjectsWithTag("GameOver"))
         {
             gameOverItems.Add(item);
+            item.SetActive(false);
         }
     }
 
@@ -55,6 +57,10 @@ public class GameManager : MonoBehaviour
         {
             obj.SetActive(true);
         }
+        foreach (GameObject obj in gameOverItems)
+        {
+            obj.SetActive(false);
+        }
         state = GameState.Playing;
         timer = 0;
     }
@@ -64,6 +70,17 @@ public class GameManager : MonoBehaviour
         if (balls == 0)
         {
             state = GameState.GameOver;
+            foreach (GameObject obj in gameplayItems)
+            {
+                obj.SetActive(false);
+            }
+            foreach (GameObject obj in gameOverItems)
+            {
+                obj.SetActive(true);
+                if (obj.name == "FinalScore"){
+                    obj.GetComponent<Text>().text = "Final Score: " + score;
+                }
+            }
         }
         if (state == GameState.Playing)
         {
@@ -76,8 +93,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (state == GameState.Start) { }
-        else if (state == GameState.Playing)
+        if (state == GameState.Playing)
         {
             timer += Time.deltaTime;
             if (timer > 5f)
@@ -87,7 +103,6 @@ public class GameManager : MonoBehaviour
             }
             scoreText.text = $"Score = {score}\nBalls = {balls}";
         }
-        else if (state == GameState.GameOver) { }
     }
 }
 
